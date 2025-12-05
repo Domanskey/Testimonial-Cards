@@ -1,9 +1,10 @@
 import './style.css'
 
+
 const testimonials = [
     {
         name: 'James MacGyver',
-        text: 'roadhmap.sh is an incredible resource. I was fortunate to discover it during my university days in 2018. Back then, it was just a single repository with three images. It\'s amazing to see how much impact it has had on millions of lives since then.'
+        text: 'roadhmap.sh is an incredible resource. I discovered it in 2018. Back then, it was just a single repository with three images. It\'s amazing to see how much impact it has'
     },
     {
         name: 'Indiana Jones',
@@ -19,9 +20,10 @@ const testimonials = [
     },
     {
         name: 'Jane Williams',
-        text: 'The structured learning paths on roadmap.sh have been instrumental in my career growth. The community support is also fantastic, making it easier to stay motivated and on track.'
+        text: 'The structured learning paths on roadmap.sh have been instrumental in my career growth. The community support is also fantastic, making it easier to stay motivated.'
     }
 ]
+
 
 const carousel = document.querySelector('.carousel');
 const leftButton = document.querySelector('.button--left');
@@ -29,6 +31,8 @@ const rightButton = document.querySelector('.button--right');
 const description = document.querySelector('.testimonials__description');
 const author = document.querySelector('.author--testimonials');
 let curIndex = 2;
+let intervalId = null;
+
 
 function toRange(index, maxSize) {
     if (index < 0) {
@@ -38,8 +42,36 @@ function toRange(index, maxSize) {
     return index % maxSize;
 }
 
+
 function shiftRight() {
-    shift('right');
+    const images = document.querySelectorAll('.carousel__image');
+    const left = images[0];
+    const right = images[3];
+    const cur = images[2];
+    const prev = images[1];
+
+    cur.classList.remove("carousel__image--active");
+    right.classList.add('carousel__image--inactive');
+    left.classList.remove('carousel__image--inactive');
+    prev.classList.add("carousel__image--active");
+    carousel.insertBefore(carousel.lastElementChild, carousel.firstElementChild);
+
+
+    curIndex = toRange(curIndex - 1, images.length);
+
+    description.textContent = testimonials[curIndex].text;
+    description.classList.add('right-swing');
+    setTimeout(() => {
+        description.classList.remove('right-swing');
+    }, 100);
+
+    author.textContent = testimonials[curIndex].name;
+    author.classList.add('up-swing');
+    setTimeout(() => {
+        author.classList.remove('up-swing');
+    }, 100);
+
+    delayInterval();
 }
 
 function shiftLeft() {
@@ -48,20 +80,12 @@ function shiftLeft() {
     const right = images[4];
     const cur = images[2];
     const next = images[3];
+
     cur.classList.remove("carousel__image--active");
-
-    setTimeout(() => {
-        left.classList.add('carousel__image--inactive');
-    }, 0); //100
-
-    setTimeout(() => {
-        right.classList.remove('carousel__image--inactive');
-    }, 0); //200
-
-    setTimeout(() => {
-        next.classList.add("carousel__image--active");
-        carousel.appendChild(carousel.firstElementChild);
-    }, 0); //400
+    left.classList.add('carousel__image--inactive');
+    right.classList.remove('carousel__image--inactive');
+    next.classList.add("carousel__image--active");
+    carousel.appendChild(carousel.firstElementChild);
 
     curIndex = toRange(curIndex + 1, images.length);
 
@@ -77,11 +101,24 @@ function shiftLeft() {
         author.classList.remove('up-swing');
     }, 100);
 
-
+    delayInterval();
 }
+
 
 leftButton.addEventListener('click', shiftRight);
 rightButton.addEventListener('click', shiftLeft);
 
+
 // Auto-scroll every 5 seconds
-// setInterval(moveRight, 5000);
+function startInterval() {
+    if (intervalId === null) {
+        intervalId = setInterval(shiftLeft, 5000); 
+    }
+}
+startInterval();
+
+function delayInterval() {
+    clearInterval(intervalId);
+    intervalId = null;
+    startInterval();
+}

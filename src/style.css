@@ -231,6 +231,7 @@
 
 .carousel {
   width: 4rem;
+  height: 3rem;
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
@@ -293,6 +294,11 @@
   .carousel__image {
     height: 2.5rem;
     width: 2.5rem;
+  }
+
+  .carousel__image--active {
+    height: 3rem;
+    width: 3rem;
   }
 
   .carousel__image--inactive {
@@ -359,6 +365,7 @@
 
   .carousel {
     width: 12rem;
+    height: 3.5rem;
   }
 
   .carousel__image {
