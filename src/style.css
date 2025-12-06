@@ -36,12 +36,10 @@
   margin: 0;
   color: #aaaaaa;
   line-height: 1.2;
-  /* color: #888; */
 }
 
 .body {
   margin: 0;
-  /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
 }
@@ -214,10 +212,16 @@
   border-radius: 1rem;
   padding: 1rem 2rem;
   margin: 0;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .testimonials__description {
-  margin: 0 0 1rem 0;
+  font-size: clamp(1rem, 4.5vw, 1.3rem);
+  max-width: 384px;
+  margin: 0;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
@@ -343,7 +347,12 @@
 
   .testimonials {
     grid-column: span 2;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    height: 17rem;
+  }
+
+  .testimonials__description {
+    max-width: 512px;
   }
 
 }
@@ -361,6 +370,11 @@
   .testimonials {
     grid-column: span 2;
     font-size: 1.4rem;
+    height: 16rem;
+  }
+
+  .testimonials__description {
+    max-width: 768px;
   }
 
   .carousel {
