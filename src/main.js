@@ -12,11 +12,11 @@ const testimonials = [
     },
     {
         name: 'Artem Jones',
-        text: 'I have been solving all the project ideas on roadmap.sh and I am surprised how far I have come from where I started. Highly recommended!'
+        text: 'I have been solving all the project ideas on roadmap.sh and I am surprised how far I have come from where I started. It keeps me motivated. Highly recommended!'
     },
     {
         name: 'Jackie Mackle',
-        text: 'I find myself recommending roadmap.sh to all the internees or junior developers. It\'s a great way to skill up and grow in your career.'
+        text: 'I really recommend amazing site roadmap.sh to all the internees, junior developers and students. It\'s a great way to skill up and grow in your dream career.'
     },
     {
         name: 'Jane Williams',
